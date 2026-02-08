@@ -290,10 +290,10 @@
         const formFields = [
             {
                 id: 'name',
-                question: 'Name',
+                question: 'Your name',
                 type: 'text',
                 required: false,
-                placeholder: 'Customer Name'
+                placeholder: 'Customer name'
             },
             {
                 id: 'company',
@@ -526,7 +526,11 @@
         }
         
         function sendEmailAndShowSuccess() {
-            const subject = encodeURIComponent(`Rental Request - ${formData.company || formData.name || 'New Lead'}`);
+            const customerName = formData.name || 'No Name';
+            const company = formData.company || 'No Company';
+            const dateNeeded = formData.dateNeeded || 'No Date';
+            
+            const subject = encodeURIComponent(`Rental Request - ${customerName} - ${company} - ${dateNeeded}`);
             const body = encodeURIComponent(buildEmailBody());
             const mailtoLink = `mailto:${RECIPIENT_EMAILS.join(',')}?subject=${subject}&body=${body}`;
             
